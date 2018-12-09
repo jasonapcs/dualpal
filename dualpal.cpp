@@ -43,32 +43,31 @@ int main(){
 	input >> N >> beginning;
 	input.close();
 	
-	int amount = -1;
+	int amount = 0;
 	std::array<int,15> nums;
 	unsigned int is;
-	bool pal1;
+	int pal1;
 	
-	for (int i = beginning; i > -1; i++){
-		if (N >= amount - 1) break;
+	std::ofstream output("dualpal.out");
+	
+	for (int i = beginning + 1; amount != N; i++){
 		
-		pal1 = false;
+		pal1 = 0;
 		is = i * i;
 		
 		for (int j = 2; j <= 10; j++) {
 			if (isPalindrome(changeBase(j, is))){
-				if (pal1){
+				if (pal1 == 2){
 					amount++;
-					nums[amount] = i;
+					output << i << "\n";
+					break;
 				}
-				else {
-					pal1 = true;
-				}
+				else pal1++;
 			}
 		}
+		
 	}
-	std::ofstream output("dualpal.out");
-	for (int i = 0; i <= amount; i++)
-		output << nums[amount] << "\n";
+	
 	output.close();
 	return 0;
 }

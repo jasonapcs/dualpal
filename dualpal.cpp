@@ -37,34 +37,38 @@ std::string changeBase(const int base, const int num) {
 }
 
 int main(){
-  std::ifstream input("dualpal.in");
-  int N;
-  int beginning;
-  input >> N >> beginning;
-  input.close();
-  int amount = -1;
-  std::array<int,15> nums;
-  unsigned int is;
-  for (int i = beginning; i > -1; i++){
-    if (N >= amount) break;
-    bool pal1 = false;
-    is = i * i;
-    for (int j = 2; j <= 10; j++) {
-      if (isPalindrome(changeBase(j, is)){
-        if (pal1){
-          amount++;
-          nums[amount] = i;
-        }
-        else {
-          pal1 = true;
-        }
-      }
-    }
-  }
-  std::ofstream output("dualpal.out");
-  for (int i = 0; i <= amount; i++)
-    output << nums[amount] << "\n";
-  output.close();
-  return 0;
+	std::ifstream input("dualpal.in");
+	int N;
+	int beginning;
+	input >> N >> beginning;
+	input.close();
+	
+	int amount = -1;
+	std::array<int,15> nums;
+	unsigned int is;
+	bool pal1;
+	
+	for (int i = beginning; i > -1; i++){
+		if (N >= amount - 1) break;
+		
+		pal1 = false;
+		is = i * i;
+		
+		for (int j = 2; j <= 10; j++) {
+			if (isPalindrome(changeBase(j, is))){
+				if (pal1){
+					amount++;
+					nums[amount] = i;
+				}
+				else {
+					pal1 = true;
+				}
+			}
+		}
+	}
+	std::ofstream output("dualpal.out");
+	for (int i = 0; i <= amount; i++)
+		output << nums[amount] << "\n";
+	output.close();
+	return 0;
 }
-  
